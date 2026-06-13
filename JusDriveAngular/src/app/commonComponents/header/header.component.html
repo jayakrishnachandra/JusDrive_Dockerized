@@ -1,0 +1,19 @@
+
+<nav class="header">
+  <div class="header-left">
+     <app-logo-image></app-logo-image>
+  </div>
+ 
+
+  <div class="header-right">
+    Hello, {{firstName}}
+    <div class="avatar-container">
+      <app-avatar-image></app-avatar-image>
+      <div class="dropdown">
+          <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+

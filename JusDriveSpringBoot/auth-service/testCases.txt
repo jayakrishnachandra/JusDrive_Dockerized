@@ -1,0 +1,174 @@
+
+ 1) Customer Registration
+  POST /auth/customer/register
+ 
+ {
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "securePassword123",
+  "phone": "1234567890",
+  "address": "123 Main Street"
+}
+
+Expected Response:
+{
+    "message": "Login successful",
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc1MDQyMjI0MiwiZXhwIjoxNzUwNTA4NjQyfQ.ji_9DU91cfvn6g3YHMvZVmragu_LxSHUJW1nyNFFbjXqt_RCvjaBMgAljJAN-Gde2TmPaNESrbP4nb_94CJNuA"
+}
+------------------------------------------------------
+
+2) Customer Login
+Endpoint: POST /auth/customer/login
+
+Request JSON:
+
+ {
+  "email": "john.doe@example.com",
+  "password": "securePassword123"
+}
+ 
+Expected Response:
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+
+--------------------------------------------------------
+
+3)Owner Registration
+
+Endpoint: POST /auth/owner/register
+
+Request JSON:
+{
+  "name": "Jane Smith",
+  "email": "jane.smith@example.com",
+  "password": "ownerPassword456",
+  "phone": "9876543210",
+  "address": "456 Elm Street"
+}
+Expected Response:
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+
+------------------------------------------------------
+
+4) Owner Login
+Endpoint: POST /auth/owner/login
+
+Request JSON:
+{
+  "email": "jane.smith@example.com",
+  "password": "ownerPassword456"
+}
+Expected Response:
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+
+-------------------------------------------------------
+5) Token Validation
+Endpoint: POST /auth/customer/validateToken or POST /auth/owner/validateToken
+
+Request Header:
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Expected Response:
+
+{
+  "email": "john.doe@example.com"
+}
+
+---------------------------------------------------------
+
+6) forgot Password
+
+POST http://localhost:8081/auth/customer/forgotPassword       (or)       http://localhost:8081/auth/owner/forgotPassword
+{
+    "email" : "vemanajayakrishnachandra@gmail.com"
+}
+
+
+Expected Response : 
+
+Password reset code sent to email
+
+
+---------------------------------------------------------
+
+7) Verify the reset code (otp)
+
+http://localhost:8081/auth/customer/verifyResetCode           (or)       http://localhost:8081/auth/owner/verifyResetCode
+{
+    "email" : "vemanajayakrishnachandra@gmail.com",
+    "otp" : 188707
+}
+
+
+Expected Response : 
+
+{
+  "token": "eyJhbGciOiJIUzUxMiJ9.eqJoIovgIf0BgInWJby3_..."
+}
+
+-------------------------------------------------------------
+
+8) password reset using token
+
+POST http://localhost:8081/auth/customer/resetPassword   (or)    http://localhost:8081/auth/owner/resetPassword
+{
+    "email" : "vemanajayakrishnachandra@gmail.com",
+    "password" : "abc123"
+}
+
+Request Header:
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+Expected Response : 
+
+Password reset successful
+
+
+9) get customer user details
+Request Header:
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+http://localhost:8081/auth/customer/user
+
+{
+  "success": true,
+  "customer": {
+      "id": 5,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "password": "$2a$10$EMxXomJudgI6MmwFUcSE7OIs.d0ULZeLcrgOnQ3K9Hg8e1pJDZtMm",
+      "phone": "1234567890",
+      "address": "123 Main Street",
+      "role": "CUSTOMER",
+      "createdAt": "2025-05-28T16:14:39",
+      "modifiedAt": "2025-05-28T16:14:39"
+  }
+}
+
+10) get owner details
+
+Request Header:
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+http://localhost:8081/auth/owner/user
+
+{
+    "owner": {
+        "id": 9,
+        "name": "John Doe",
+        "email": "abc1123@example.com",
+        "password": "$2a$10$3y.yJB.KAzmz3biVsr2FxOm3XbIWU.on/PkunTxvAwBGZWFuJyWDe",
+        "phone": "1234567890",
+        "address": "123 Main Street",
+        "role": "OWNER",
+        "createdAt": "2025-06-02T12:01:04",
+        "modifiedAt": "2025-06-02T12:01:04"
+    },
+    "success": true
+}

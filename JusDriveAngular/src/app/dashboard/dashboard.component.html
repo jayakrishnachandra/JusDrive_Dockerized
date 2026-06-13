@@ -1,0 +1,100 @@
+
+<div class="container mt-4">
+ 
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="dashboard-card text-center" (click)="goToVehicleManagement()">
+        <div class="card-body">
+          <h5 class="card-title">Registered Cars</h5>
+          <p class="card-text display-6 fw-bold" style="color: orange;">{{ registeredCarsCount }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="dashboard-card text-center " (click)="goToVehicleManagement()">
+        <div class="card-body">
+          <h5 class="card-title">Available Cars</h5>
+          <p class="card-text display-6 fw-bold" style="color: orange; "> {{ availableCarsCount }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="dashboard-card text-center" (click)="goToVehicleManagement()">
+        <div class="card-body">
+          <h5 class="card-title">Inactive Cars</h5>
+          <p class="card-text display-6 fw-bold text-danger">{{ InActiveCarsCount }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="dashboard-card text-center" (click)="goToVehicleManagement()">
+        <div class="card-body">
+          <h5 class="card-title">Booked Cars</h5>
+          <p class="card-text display-6 fw-bold" style="color: orange;">   {{ BookedCarsCount }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container py-4">
+
+    <div class="row g-4">
+      <!--stats -->
+      <div class="col-12 col-md-6 ">
+        <div class="card h-100 p-3 d-flex flex-wrap align-items-center justify-content-between mb-4">
+          <h5 class="mb-3 text-center">Vehicle Distribution</h5>
+          <p-chart
+            type="doughnut"
+            [data]="data"
+            [options]="options"
+            class="dashboard-mini-chart"
+            style="height: 300px"
+          ></p-chart>
+        </div>
+      </div>
+  
+      <!-- Daily-->
+      <div class="col-12 col-md-6">
+        <div class="card h-100 p-3 d-flex flex-wrap align-items-center justify-content-between mb-4">
+          <h5 class="mb-3 text-center">Daily Booking Report</h5>
+          <p-chart
+            type="line"
+            [data]="selectedReportData.daily"
+            [options]="reportChartOptions"
+            class="w-100"
+            style="height: 200px"
+          ></p-chart>
+        </div>
+      </div>
+  
+      <!-- Weekly-->
+      <div class="col-12 col-md-6">
+        <div class="card h-100 p-3">
+          <h5 class="mb-3 text-center">Weekly Booking Report</h5>
+          <p-chart
+            type="line"
+            [data]="selectedReportData.weekly"
+            [options]="reportChartOptions"
+            class="w-100"
+            style="height: 200px"
+          ></p-chart>
+        </div>
+      </div>
+  
+      <!-- Monthly -->
+      <div class="col-12 col-md-6">
+        <div class="card h-100 p-3">
+          <h5 class="mb-3 text-center">Monthly Booking Report</h5>
+          <p-chart
+            type="line"
+            [data]="selectedReportData.monthly"
+            [options]="reportChartOptions"
+            class="w-100"
+            style="height: 200px"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  

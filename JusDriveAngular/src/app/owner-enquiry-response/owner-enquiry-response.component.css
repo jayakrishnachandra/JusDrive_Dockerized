@@ -1,0 +1,51 @@
+:host {
+  display: block;
+  padding-left: 2rem; /* Adjust as needed for sidebar width */
+  padding-right: 1rem;
+  margin-top: 1rem;
+}
+
+.card {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+.card-title{
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: orange;
+}
+.card-body {
+  padding: 1rem 1.5rem;
+}
+.card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease-in-out;
+}
+.card-body {
+  padding: 1rem 1.5rem;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+.btn {
+    color: #33333390;
+    text-decoration: none;
+    padding: 12px 50px; ;
+    display: block;
+    border-radius: 15px;
+    transition: background 0.2s;
+    background: #fff3dedd;
+
+}
+.btn:hover {
+    background: orange;
+    color : white;
+}
+
+hr {
+  margin: 0.5rem 0 1rem 0;
+}

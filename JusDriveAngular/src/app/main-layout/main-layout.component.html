@@ -1,0 +1,16 @@
+
+  <div *ngIf="isLogin; then loggedin else notLoggedin">
+  </div>
+
+  <ng-template #notLoggedin>
+    <app-home></app-home>
+  </ng-template>
+
+  <ng-template #loggedin>
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <main class="main-content">
+    <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
+  </ng-template>

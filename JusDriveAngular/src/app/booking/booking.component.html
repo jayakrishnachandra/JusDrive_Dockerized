@@ -1,0 +1,136 @@
+<div class="container mt-4">
+ 
+  <div class="searchContainer mb-4">
+      <input
+        class="form-control searchBar flex-fill"
+        type="text"
+        list="carSuggestions"
+        [(ngModel)]="searchKeyword"
+        placeholder="Find cars..."
+      />
+ 
+      <button class="btn flex-fill" (click)="onSearch()" >
+      <i class="fa-solid fa-magnifying-glass"></i>
+        Search
+      </button>
+ 
+      <datalist id="carSuggestions" class="bg-dark">
+        <option *ngFor="let suggestion of suggestions" [value]="suggestion"></option>
+      </datalist>
+ 
+    </div>
+ 
+ 
+ 
+  <div class="row">
+    <div class="col-md-6 col-lg-4 mb-4" *ngFor="let car of availableCars">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img *ngIf="car.image"
+              [src]="'data:image/jpeg;base64,' + car.image"
+              style="width: 100% ; height: 200px; object-fit: contain;" />
+            <img *ngIf="!car.image" src="assets/default_car.jpg"
+              class="card-img"  alt="Car Image" />
+          </div>
+            <h5 class="mb-3">{{ car.brand }} - {{ car.model }}</h5>
+          <p>
+            <strong>Registration No:</strong> {{ car.registrationNumber }}<br>
+            <strong>Color:</strong> {{ car.color }},
+            <strong>Car Type:</strong> {{ car.carType }},
+            <strong>Seating:</strong> {{ car.seatingCapacity }}<br>
+            <strong>Price/Day:</strong> {{ car.pricePerDay ? 'Rs.' + car.pricePerDay : 'N/A' }}
+          </p>
+          <hr class="my-2">
+            <h6 class="text-muted mt-3">Owner Details</h6>
+    <p>
+      <strong>Name:</strong> {{ car.owner?.name }},
+      <strong>Contact:</strong> {{ car.owner?.phone }}<br>
+      <strong>Email:</strong> {{ car.owner?.email }}
+    </p>
+    <div class="card-footer">
+      <button class="btn  flex-fill " (click)="openEnquiryForm(car)">
+        <i class="fa-solid fa-message"></i> Enquiry</button>
+ 
+      <button class="btn  flex-fill " (click)="openBookingForm(car)">
+        <i class="fa-solid fa-car-side"></i> Book</button>
+    </div>
+          </div>
+        </div>
+      </div>
+      
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 0">
+            <a class="page-link text-warning" (click)="goToPage(currentPage - 1)">Previous</a>
+          </li>
+    
+          <li class="page-item" [class.disabled]="currentPage + 1 >= totalPages">
+            <a class="page-link text-warning" (click)="goToPage(currentPage + 1)">Next</a>
+          </li>
+        </ul>
+      </nav>
+ 
+  <div *ngIf="selectedCar" class="popup-overlay">
+    <div class="popup-card">
+      <div class="modal-header">
+        <h5 class=" mb-3">Enquiry for {{ selectedCar.brand }} - {{ selectedCar.model }}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeEnquiryForm()"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Registration Number:</strong> {{ selectedCar.registrationNumber }}</p>
+        <p><strong>Color:</strong> {{ selectedCar.color }}</p>
+        <p><strong>Car Type:</strong> {{ selectedCar.carType }}</p>
+        <p><strong>Seating Capacity:</strong> {{ selectedCar.seatingCapacity }}</p>
+        <p><strong>Price Per Day:</strong> {{ selectedCar.pricePerDay}}</p>
+        <textarea [(ngModel)]="enquiryMessage" class="form-control mt-3" placeholder="Enter your enquiry message"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" (click)="onEnquiry()">Send Enquiry</button>
+        <button class="btn" (click)="closeEnquiryForm()">Cancel</button>
+      </div>
+    </div>
+  </div>
+ 
+  <div *ngIf="bookingFormVisible && selectedCar" class="popup-overlay">
+    <div class="popup-card">
+      <div class="modal-header">
+        <h5 class="modal-title">Booking for {{ selectedCar.brand }} - {{ selectedCar.model }}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeBookingForm()"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="gmailId" class="form-label">Email ID</label>
+            <input type="email" id="gmailId" [(ngModel)]="gmailId" name="gmailId" class="form-control" placeholder="Enter your Email ID" required />
+          </div>
+          <div class="mb-3">
+            <label for="bookingDate" class="form-label">Booking Date</label>
+            <input type="datetime-local" id="bookingDate"
+                   [(ngModel)]="bookingDate" name="bookingDate"
+                   class="form-control" (change)="calculateTotalAmount()" required />
+            <div class="text-danger" *ngIf="bookingDateError">{{ bookingDateError }}</div>
+          </div>
+ 
+          <div class="mb-3">
+            <label for="returnDate" class="form-label">Return Date</label>
+            <input type="datetime-local" id="returnDate"
+                   [(ngModel)]="returnDate" name="returnDate"
+                   class="form-control" (change)="calculateTotalAmount()" required />
+            <div class="text-danger" *ngIf="returnDateError">{{ returnDateError }}</div>
+          </div>
+          <div class="mb-3">
+            <label for="totalAmount" class="form-label">Total Amount</label>
+            <input type="number" id="totalAmount" [(ngModel)]="totalAmount" name="totalAmount" class="form-control" required disabled />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" (click)="onBook()">Confirm Booking</button>
+        <button class="btn" (click)="closeBookingForm()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+ 

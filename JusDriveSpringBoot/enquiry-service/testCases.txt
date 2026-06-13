@@ -1,0 +1,398 @@
+1)
+post http://localhost:8082/api/enquiries/new
+{
+    "customerId": 5,
+    "carId": 3,
+    "message": "I love this car soo much."
+}
+
+Expected Response :
+
+{
+    "enquiryId": 23,
+    "customerId": 5,
+    "carId": 3,
+    "message": "I love this car soo much.",
+    "createdAt": "2025-06-01T00:23:41.5794889",
+    "status": "pending"
+}
+
+2)
+
+post http://localhost:8082/api/enquiries/12/response
+
+{
+    "response": "Thank you for your enquiry. Here are the details you requested."
+}
+
+
+Expected response : 
+{
+  "responseId": 3,
+  "enquiry": {
+    "enquiryId": 12,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more.",
+    "createdAt": "2025-05-25T15:44:00",
+    "status": "replied"
+  },
+  "response": "Thank you for your enquiry. Here are the details you requested.",
+  "respondedAt": "2025-05-25T16:29:09.6166318"
+}
+
+
+3) Get all enquiries
+
+get     http://localhost:8082/api/enquiries/all
+
+Expected Response:
+
+[
+  {
+    "enquiryId": 1,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more details about this car.",
+    "createdAt": "2025-05-25T15:44:00",
+    "status": "pending"
+  },
+  {
+    "enquiryId": 8,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more details about this car.",
+    "createdAt": "2025-05-25T15:44:00",
+    "status": "pending"
+  },
+  {
+    "enquiryId": 12,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more.",
+    "createdAt": "2025-05-25T15:44:00",
+    "status": "replied"
+  },
+  {
+    "enquiryId": 13,
+    "customerId": 1,
+    "carId": 2,
+    "message": " to know more.",
+    "createdAt": "2025-05-25T16:15:00",
+    "status": "pending"
+  },
+  {
+    "enquiryId": 15,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more details about this car.",
+    "createdAt": "2025-05-25T16:20:27",
+    "status": "pending"
+  },
+  {
+    "enquiryId": 16,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more details about this car.",
+    "createdAt": "2025-05-25T16:20:32",
+    "status": "pending"
+  },
+  {
+    "enquiryId": 17,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more details about this car.",
+    "createdAt": "2025-05-25T16:20:33",
+    "status": "replied"
+  },
+  {
+    "enquiryId": 19,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I love this car.",
+    "createdAt": "2025-05-25T16:32:17",
+    "status": "pending"
+  }
+]
+
+
+4)getByCustomer
+
+get http://localhost:8082/api/enquiries/customer/1
+
+Expected Response:
+
+[
+  {
+    "enquiryId": 1,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more details about this car.",
+    "createdAt": "2025-05-25T15:44:00",
+    "status": "pending"
+  },
+  {
+    "enquiryId": 8,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more details about this car.",
+    "createdAt": "2025-05-25T15:44:00",
+    "status": "pending"
+  },
+  {
+    "enquiryId": 12,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more.",
+    "createdAt": "2025-05-25T15:44:00",
+    "status": "replied"
+  },
+  {
+    "enquiryId": 13,
+    "customerId": 1,
+    "carId": 2,
+    "message": " to know more.",
+    "createdAt": "2025-05-25T16:15:00",
+    "status": "pending"
+  },
+  {
+    "enquiryId": 15,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more details about this car.",
+    "createdAt": "2025-05-25T16:20:27",
+    "status": "pending"
+  },
+  {
+    "enquiryId": 16,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more details about this car.",
+    "createdAt": "2025-05-25T16:20:32",
+    "status": "pending"
+  },
+  {
+    "enquiryId": 17,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more details about this car.",
+    "createdAt": "2025-05-25T16:20:33",
+    "status": "replied"
+  },
+]
+
+5) getResponse for enquiry id 
+
+get http://localhost:8082/api/enquiries/17/response
+
+Expected Response:
+
+{
+  "responseId": 1,
+  "enquiry": {
+    "enquiryId": 17,
+    "customerId": 1,
+    "carId": 2,
+    "message": "I would like to know more details about this car.",
+    "createdAt": "2025-05-25T16:20:33",
+    "status": "replied"
+  },
+  "response": "Thank you for your enquiry. Here are the details you requested.",
+  "respondedAt": "2025-05-25T16:28:51"
+}
+
+
+6)
+http://localhost:8082/api/enquiries/customer/5/details
+
+[
+    {
+        "enquiryId": 24,
+        "customerId": 5,
+        "message": "I love this car soo much.",
+        "createdAt": "2025-06-02T09:03:08",
+        "status": "replied",
+        "carId": 4,
+        "carModel": "Camry",
+        "carBrand": "Toyota",
+        "registrationNumber": "TN09AB1234",
+        "color": "Blue",
+        "carType": "Sedan",
+        "seatingCapacity": 5,
+        "pricePerDay": 1500.0,
+        "image": null,
+        "response": "Thank you for your enquiry. Here are the details you requested.",
+        "respondedAt": "2025-06-02T09:04:44"
+    },
+    {
+        "enquiryId": 27,
+        "customerId": 5,
+        "message": "I love this car soo much.",
+        "createdAt": "2025-06-02T12:28:49",
+        "status": "replied",
+        "carId": 12,
+        "carModel": "Nexon Ev",
+        "carBrand": "Tata",
+        "registrationNumber": "Ap39 LK 1234",
+        "color": "white",
+        "carType": "SUV",
+        "seatingCapacity": 4,
+        "pricePerDay": 600.0,
+        "image": null,
+        "response": "Thank you for your enquiry. Here are the details you requested.",
+        "respondedAt": "2025-06-02T12:30:18"
+    },
+    {
+        "enquiryId": 28,
+        "customerId": 5,
+        "message": "what is the size of this car?.",
+        "createdAt": "2025-06-03T09:38:03",
+        "status": "replied",
+        "carId": 12,
+        "carModel": "Nexon Ev",
+        "carBrand": "Tata",
+        "registrationNumber": "Ap39 LK 1234",
+        "color": "white",
+        "carType": "SUV",
+        "seatingCapacity": 4,
+        "pricePerDay": 600.0,
+        "image": null,
+        "response": "5 Seater",
+        "respondedAt": "2025-06-03T10:10:28"
+    },
+    {
+        "enquiryId": 29,
+        "customerId": 5,
+        "message": "what is the size of this car?.",
+        "createdAt": "2025-06-03T10:12:16",
+        "status": "replied",
+        "carId": 4,
+        "carModel": "Camry",
+        "carBrand": "Toyota",
+        "registrationNumber": "TN09AB1234",
+        "color": "Blue",
+        "carType": "Sedan",
+        "seatingCapacity": 5,
+        "pricePerDay": 1500.0,
+        "image": null,
+        "response": " it is 5 Seater",
+        "respondedAt": "2025-06-03T10:13:22"
+    },
+    {
+        "enquiryId": 30,
+        "customerId": 5,
+        "message": "what is the size of this car?.",
+        "createdAt": "2025-06-03T10:18:06",
+        "status": "replied",
+        "carId": 4,
+        "carModel": "Camry",
+        "carBrand": "Toyota",
+        "registrationNumber": "TN09AB1234",
+        "color": "Blue",
+        "carType": "Sedan",
+        "seatingCapacity": 5,
+        "pricePerDay": 1500.0,
+        "image": "/9j/4AAQSkZJRgABAQAASABIAAD/2wCEAAEBAQEBAQIBAQICAgICAgMCAgICAwQDAwMDAwQFBAQEBAQEBQUFBQUFBQUGBgYGBgYHBwcHBwgICAgICAgICAgBAQEBAgICAwICAwgGBQYICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICP/CABEIA4QH0AMBIgACEQEDEQH/xAAfAAEAAQQDAQEBAAAAAAAAAAAABQMEBgcCCAkBCgv/2gAIAQEAAAAA/fwAAAAAAAAAAAAAAAA
+        "response": " it is 5 Seater",
+        "respondedAt": "2025-06-03T10:18:30"
+    },
+    {
+        "enquiryId": 31,
+        "customerId": 5,
+        "message": "I love this car soo much.",
+        "createdAt": "2025-06-06T15:28:57",
+        "status": "replied",
+        "carId": 12,
+        "carModel": "Nexon Ev",
+        "carBrand": "Tata",
+        "registrationNumber": "Ap39 LK 1234",
+        "color": "white",
+        "carType": "SUV",
+        "seatingCapacity": 4,
+        "pricePerDay": 600.0,
+        "image": "/9j/4AAQSkZJRgABAQAASABIAAD/2wCEAAEBAQEBAQIBAQICAgICAgMCAgICAwQDAwMDAwQFBAQEBAQEBQUFBQUFBQUGBgYGBgYHBwcHBwgICAgICAgICAgBAQEBAgICAwICAwgGBQYICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICP/CABEIA4QH0AMBIgACEQEDEQH/xAAfAAEAAQQDAQEBAAAAAAAAAAAABQMEBgcCCAkBCgv/2gAIAQEAAAAA/fwAAAAAAAAAAAAAAAA
+       "response": "Thank you for your enquiry. Here are the details you requested.",
+        "respondedAt": "2025-06-06T15:29:31"
+    }
+]
+
+7) Enquiries by owner id
+
+GET http://localhost:8082/api/enquiries/owner/2
+
+Expected Response:
+
+[
+    {
+        "enquiryId": 24,
+        "customerId": 5,
+        "message": "I love this car soo much.",
+        "createdAt": "2025-06-02T09:03:08",
+        "status": "replied",
+        "carId": 4,
+        "carModel": "Camry",
+        "carBrand": "Toyota",
+        "registrationNumber": "TN09AB1234",
+        "color": "Blue",
+        "carType": "Sedan",
+        "seatingCapacity": 5,
+        "pricePerDay": 1500.0,
+        "image": "/9j/4AAQSkZJRgABAQAASABIAAD/2wCEAAEB...,
+        "response": "Thank you for your enquiry. Here are the details you requested.",
+        "respondedAt": "2025-06-02T09:04:44"
+    },
+    {
+        "enquiryId": 29,
+        "customerId": 5,
+        "message": "what is the size of this car?.",
+        "createdAt": "2025-06-03T10:12:16",
+        "status": "replied",
+        "carId": 4,
+        "carModel": "Camry",
+        "carBrand": "Toyota",
+        "registrationNumber": "TN09AB1234",
+        "color": "Blue",
+        "carType": "Sedan",
+        "seatingCapacity": 5,
+        "pricePerDay": 1500.0,
+        "image": "/9j/4AAQSkZJRgABAQAASABIAAD/2wCEAAEBAQEBAQIBAQICAgICAgMCAgICAwQDAwMDAwQFB,
+         "response": " it is 5 Seater",
+        "respondedAt": "2025-06-03T10:13:22"
+    },
+    {
+        "enquiryId": 30,
+        "customerId": 5,
+        "message": "what is the size of this car?.",
+        "createdAt": "2025-06-03T10:18:06",
+        "status": "replied",
+        "carId": 4,
+        "carModel": "Camry",
+        "carBrand": "Toyota",
+        "registrationNumber": "TN09AB1234",
+        "color": "Blue",
+        "carType": "Sedan",
+        "seatingCapacity": 5,
+        "pricePerDay": 1500.0,
+        "image": "/9j/4AAQSkZJRgABAQAASABIAAD/+HuTtP2w4GsfBHTdriN8UNMWuI3zu9fK1qiN87vKOkbQRdNV0esp1srGAah7z7+Eic0AP/uQ//9k=",
+        "response": " it is 5 Seater",
+        "respondedAt": "2025-06-03T10:18:30"
+    },
+    {
+        "enquiryId": 34,
+        "customerId": 5,
+        "message": "I love this car soo much now.",
+        "createdAt": "2025-06-22T19:08:55",
+        "status": "pending",
+        "carId": 4,
+        "carModel": "Camry",
+        "carBrand": "Toyota",
+        "registrationNumber": "TN09AB1234",
+        "color": "Blue",
+        "carType": "Sedan",
+        "seatingCapacity": 5,
+        "pricePerDay": 1500.0,
+        "image": "/9j/4AAQSkZJRgABAQAASABIAAD/2wCEAAEBAQEBAQIBAQICAgICAgMCAgICAwQDAwMDAw..,
+         "response": null,
+        "respondedAt": null
+    }
+]

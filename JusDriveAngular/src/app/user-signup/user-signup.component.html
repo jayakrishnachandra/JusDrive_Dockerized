@@ -1,0 +1,78 @@
+<div class="main-container">
+
+  <div class="left-panel">
+    <img src="assets/jusride_user_car.svg" alt="Order a Car Illustration">
+  </div>
+
+ 
+  <div class="right-panel">
+    <div class="form-box">
+      <h1 style="color: var(--navy-blue);">
+        Welcome to <b><span style="color: var(--yellow);">JusDrive</span></b>.
+      </h1>
+      <h2 class="mb-4" style="color: var(--navy-blue); font-weight: 500;">Signup</h2>
+
+
+      <form #signupForm="ngForm" (ngSubmit)="onSignup(signupForm)">
+        <div class="mb-3">
+
+          <label for="name" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="name" name = "name" ngModel required #name = "ngModel">
+
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" ngModel required #email="ngModel" email />
+
+          <div *ngIf="email.invalid && email.touched" class="text-danger">
+            <div *ngIf="email.errors?.['required'] && email.touched">
+              Email is required.
+            </div>
+
+            <div *ngIf="email.errors?.['email']">
+              Please enter a valid email address.
+            </div>
+          </div>
+            
+
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" ngModel required minlength="8" #password="ngModel" />
+         
+          
+          <div *ngIf="password.invalid && password.touched" class="text-danger">
+
+            <small *ngIf="password.errors?.['required']">Password is required.</small>
+
+            Password must be at least {{ password.errors?.['minlength'].requiredLength }} characters long.
+            <small *ngIf="password.errors?.['minlength']">
+              
+            </small>
+          </div>
+
+
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="phone" class="form-control" id="phone"  name = "phone" ngModel required />
+
+
+       
+            <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" name="address" ngModel required />
+        
+          
+        </div>
+      
+      
+        <div class="d-grid">
+          <button type="submit" class="btn btn-custom" [disabled]="signupForm.invalid">Sign up</button>
+        </div>
+      </form>
+      
+      <p class="mt-3">
+        Already have an account?
+        <a (click)="navigateTo('/user-login')"  style=" color : orange ; cursor:pointer;">
+          <i class="fas fa-car icon"></i> Login
+        </a>
+      </p>
+
+
+    </div>
+  </div>
+</div>

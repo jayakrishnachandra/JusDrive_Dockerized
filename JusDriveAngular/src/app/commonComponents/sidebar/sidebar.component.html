@@ -1,0 +1,46 @@
+<aside class="sidebar" *ngIf="!isMobile || isSidebarOpen">
+  <ul class="nav-links">
+    <li>
+      <a *ngIf="role=='owner'" (click)="navigateTo('/dashboard')">
+        <i class="fas fa-gauge icon"></i> Dashboard
+      </a>
+    </li>
+    <li>
+      <a *ngIf="role=='owner'" (click)="navigateTo('/vehicle-management')">
+        <i class="fas fa-car icon"></i> Vehicle Management
+      </a>
+    </li>
+    <li>
+      <a *ngIf="role=='owner'" (click)="navigateTo('/owner-enquiry-response')">
+        <i class="fas fa-reply icon"></i> Enquiry Response
+      </a>
+    </li>
+
+    <li>
+      <a *ngIf="role === 'owner'" (click)="navigateTo('/owner-booking-status')">
+        <i class="fas fa-tasks icon"></i> Booking Status
+      </a>
+    </li>
+    
+    <li>
+      <a *ngIf="role=='customer'" (click)="navigateTo('/customer-enquiry')">
+        <i class="fas fa-envelope icon"></i> Customer Enquiry
+      </a>
+    </li>
+    <li>
+      <a *ngIf="role=='customer'" (click)="navigateTo('/booking')">
+        <i class="fas fa-book icon"></i> Booking
+      </a>
+    </li>
+    <li>
+      <a *ngIf="role=='customer'" (click)="navigateTo('/booking-history')">
+        <i class="fas fa-calendar-check icon"></i> Booking History
+      </a>
+    </li>
+
+  </ul>
+</aside>
+<div class="toggle" *ngIf="isMobile" (click)="toggleSidebar()">
+  <i class="fas fa-bars"></i>
+</div>
+<div class="overlay" *ngIf="isMobile && isSidebarOpen" (click)="closeSidebar()"></div>

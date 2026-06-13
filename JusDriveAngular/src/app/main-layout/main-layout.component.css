@@ -1,0 +1,12 @@
+/* Adjust the value (e.g., 220px) to match your sidebar width */
+.main-content {
+  margin-left: 220px;
+  margin-top: 50px;
+    padding: 24px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+}

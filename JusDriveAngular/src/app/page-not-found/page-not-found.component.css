@@ -1,0 +1,20 @@
+.not-found {
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    margin-top: 100px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .not-found h1 {
+    font-size: 100px;
+    color: #fda44c;
+  }
+  
+  .not-found p {
+    font-size: 24px;
+    color: #000000;
+  }
+
+  body{
+    background-color: rgb(255, 255, 255);
+  }

@@ -1,0 +1,46 @@
+<div *ngIf="enquiries && enquiries.length; else loading">
+  <div class="card mb-4" *ngFor="let enquiry of enquiries">
+    <div class="row g-0">
+      <div class="col-md-4 d-flex align-items-center justify-content-center">
+        <img [src]="'data:image/jpeg;base64,' + enquiry.image"
+             alt="Car Image"
+             class="img-fluid rounded-start"
+             style="max-width: 380px; max-height: 320px; object-fit: contain;">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title mb-1 ">
+            {{ enquiry.carBrand }} {{ enquiry.carModel }} ({{ enquiry.registrationNumber }})
+          </h5>
+          <p class="mb-1">
+            <strong>Color:</strong> {{ enquiry.color }} |
+            <strong>Type:</strong> {{ enquiry.carType }} |
+            <strong>Seats:</strong> {{ enquiry.seatingCapacity }} |
+            <strong>₹{{ enquiry.pricePerDay }}/day</strong>
+          </p>
+          <hr>
+          <div>
+            <p class="mb-1"><strong>Status:</strong> {{ enquiry.status }}</p>
+            <p class="mb-1"><strong>Customer Message:</strong> {{ enquiry.message }}</p>
+            <p class="mb-1 badge bg-light text-secondary">{{ enquiry.createdAt ? (enquiry.createdAt | date:'medium') : '---' }}</p>
+            <div *ngIf="enquiry.status === 'replied'">
+              <p class="mb-1"><strong>Your Response:</strong> {{ enquiry.response }}</p>
+              <p class="mb-1 badge bg-light text-secondary">{{enquiry.respondedAt ? (enquiry.respondedAt | date:'medium') : '---' }}</p>
+            </div>
+            <div *ngIf="enquiry.status === 'pending'">
+              <textarea [(ngModel)]="enquiry.replyText" class="form-control mb-2" rows="2" placeholder="Type your reply"></textarea>
+              <button class="btn btn-m" (click)="sendReply(enquiry)">Send Reply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="spinner-border text-warning">
+    </div>
+  </div>
+</ng-template>

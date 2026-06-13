@@ -1,0 +1,63 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "ApiGatewayApplication",
+            "request": "launch",
+            "mainClass": "com.jusdrive.api_gateway.ApiGatewayApplication",
+            "projectName": "api-gateway"
+        },
+        {
+            "type": "java",
+            "name": "AuthServiceApplication",
+            "request": "launch",
+            "mainClass": "com.jusDrive.auth_service.AuthServiceApplication",
+            "projectName": "auth-service"
+        },
+        {
+            "type": "java",
+            "name": "BookingServiceApplication",
+            "request": "launch",
+            "mainClass": "com.jusdrive.booking_service.BookingServiceApplication",
+            "projectName": "booking-service"
+        },
+        {
+            "type": "java",
+            "name": "CarServiceApplication",
+            "request": "launch",
+            "mainClass": "com.jusdrive.CarService.CarServiceApplication",
+            "projectName": "car-service"
+        },
+        {
+            "type": "java",
+            "name": "EnquiryServiceApplication",
+            "request": "launch",
+            "mainClass": "com.jusdrive.EnquiryService.EnquiryServiceApplication",
+            "projectName": "enquiry-service"
+        },
+        {
+            "type": "java",
+            "name": "NotificationServiceApplication",
+            "request": "launch",
+            "mainClass": "com.jusdrive.notification_service.NotificationServiceApplication",
+            "projectName": "notification-service"
+        },
+        {
+            "type": "java",
+            "name": "ServiceRegistryApplication",
+            "request": "launch",
+            "mainClass": "com.jusdrive.service_registry.ServiceRegistryApplication",
+            "projectName": "service-registry"
+        }
+    ]
+}

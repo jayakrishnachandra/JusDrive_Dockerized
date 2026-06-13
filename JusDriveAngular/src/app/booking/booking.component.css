@@ -1,0 +1,146 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 400px;
+  max-height: 90%; /* Ensure modal does not exceed viewport height */
+  overflow-y: auto; /* Allow scrolling inside the modal */
+}
+.modal-content textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.modal-content button {
+  margin-right: 0.5rem;
+}
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+.modal-footer button {
+  margin-left: 0.5rem;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+body {
+  overflow:auto; /* Prevent scrolling when modal is open */
+}
+
+.popup-overlay {
+  position: fixed; /* Ensures it covers the viewport */
+  top: 0;
+  left: 0;
+  width: 100%; /* Full viewport width */
+  height: 100%; /* Full viewport height */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex; /* Centers content */
+  justify-content: center;
+  align-items: center;
+  z-index: 1050; /* Ensure it is above other elements */
+}
+
+.popup-card {
+  background: #fff;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  h5{
+    color: orange;
+  }
+}
+.card-header {
+  border: none !important;
+}
+.btn {
+  color: #33333390;
+  background: #fff3dedd;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  display:inline-block;
+  justify-content:flex-start;
+  align-items:flex-start;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.card-footer, .searchContainer {
+  display: flex;
+  gap: 10px; /* Adjust spacing as needed */
+  border-top: none !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
+.btn:hover {
+  background: orange;
+  color: white;
+}
+.card-body h5 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color:orange;
+  margin-bottom: 1rem;
+}
+/* .card {
+  border: none !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+} */
+
+.searchBar
+{
+  border-radius: 20px;
+  height: 50px;
+  width: 60%;
+}
+
+.searchBar:focus
+{
+box-shadow: 0 0 0 0.25rem rgba(255, 165, 0, 0.25);
+border-color: #33333390;
+}
+.card {
+  padding-left: 2%;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.2s ease-in-out;
+}
+.card-title {
+  font-size: 1.25rem;
+  /* color:orange; */
+  font-weight: bold;
+}
+ 
+.card-body {
+  padding: 1rem 1.5rem;
+}
+.card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.car-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+}

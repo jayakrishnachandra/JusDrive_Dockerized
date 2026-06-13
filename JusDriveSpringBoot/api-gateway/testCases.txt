@@ -1,0 +1,78 @@
+No need to give tokens for register and login apis.
+
+for the rest of all apis we need to add the token in Authorization header as follows.
+
+
+
+1)POST  http://localhost:8000/api/cars/newCar?ownerId=3
+
+Authorization Header
+
+eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqb2huMTIzMjI0NS5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3NDg3MTQ4ODIsImV4cCI6MTc0ODgwMTI4Mn0.4-UiJPwvXosOo4xGduddxusIWDya-ZeO78PKRy3I2YjLLV9D1ddHzBZCMs8EyIfL
+
+Request body : 
+
+ {
+     "brand": "Toyota",
+     "model": "Camry",
+     "registrationNumber": "TN09Ac12775",
+     "year": 2025,
+     "color": "Blue",
+     "carType": "Sedan",
+     "seatingCapacity": 5,
+     "pricePerDay": 1500.0,
+     "status": "AVAILABLE"
+   }
+
+
+
+   response : 
+
+   {
+    "carId": 10,
+    "owner": {
+        "id": 3,
+        "name": "Amit Sharma",
+        "email": "amit.sharma@example.in",
+        "password": "securePass!",
+        "phone": "+91-9876543210",
+        "address": "456 MG Road, Mumbai, India",
+        "role": "OWNER",
+        "createdAt": "2025-05-27T09:28:12",
+        "modifiedAt": "2025-05-27T09:28:12"
+    },
+    "brand": "Toyota",
+    "model": "Camry",
+    "registrationNumber": "TN09Ac12775",
+    "year": 2025,
+    "color": "Blue",
+    "carType": "Sedan",
+    "seatingCapacity": 5,
+    "pricePerDay": 1500.0,
+    "status": "AVAILABLE",
+    "image": null,
+    "createdAt": "2025-05-31T23:50:31.4554236",
+    "modifiedAt": "2025-05-31T23:50:31.4554236"
+}
+
+
+2) POST http://localhost:8000/auth/customer/login
+
+
+{
+  "email": "john.doe@example.com",
+  "password": "securePassword123"
+}
+ 
+
+ Expected Response :
+  
+{
+    "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTc0ODcxNTcxNywiZXhwIjoxNzQ4ODAyMTE3fQ.720DTDJ3fMiSmmoVi967HvyzhRplUK15lDNaRptnIMZphQUJeyvHeRVDbHvqlSOp"
+}
+
+
+
+3)
+
+http://localhost:8000/api/enquiries/all

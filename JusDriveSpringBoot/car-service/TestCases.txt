@@ -1,0 +1,256 @@
+---- Car Controller ----
+1) Adding new car
+   http://localhost:8080/api/cars/newCar?ownerId=3
+   POST
+   params : ownerId : 3
+   body-raw-json:
+   {
+     "brand": "Toyota",
+     "model": "Camry",
+     "registrationNumber": "TN09AB1234",
+     "year": 2025,
+     "color": "Blue",
+     "carType": "Sedan",
+     "seatingCapacity": 5,
+     "pricePerDay": 1500.0,
+     "status": "AVAILABLE"
+   }
+
+   Expected Output:
+
+   {
+       "carId": 6,
+       "owner": {
+           "id": 3,
+           "name": "Amit Sharma",
+           "email": "amit.sharma@example.in",
+           "password": "securePass!",
+           "phone": "+91-9876543210",
+           "address": "456 MG Road, Mumbai, India",
+           "role": "OWNER",
+           "createdAt": "2025-05-29T23:55:27",
+           "modifiedAt": "2025-05-29T23:55:27"
+       },
+       "brand": "Toyota",
+       "model": "Camry",
+       "registrationNumber": "TN09AB1234",
+       "year": 2025,
+       "color": "Blue",
+       "carType": "Sedan",
+       "seatingCapacity": 5,
+       "pricePerDay": 1500.0,
+       "status": "AVAILABLE",
+       "image": null,
+       "createdAt": "2025-05-31T21:09:29.9951819",
+       "modifiedAt": "2025-05-31T21:09:29.9951819"
+   }
+
+2) Adding/Updating Image
+   http://localhost:8080/api/cars/updateImage?carId=6
+   PUT
+   params : carId : 6
+   body : form-data :
+   image (type : file) : select file at -> src/main/resources/static/images/car_images/corolla_blue.jpg
+
+   Expected Output:
+   {
+       "carId": 6,
+       "owner": {
+           "id": 3,
+           "name": "Amit Sharma",
+           "email": "amit.sharma@example.in",
+           "password": "securePass!",
+           "phone": "+91-9876543210",
+           "address": "456 MG Road, Mumbai, India",
+           "role": "OWNER",
+           "createdAt": "2025-05-29T23:55:27",
+           "modifiedAt": "2025-05-29T23:55:27"
+       },
+       "brand": "Toyota",
+       "model": "Camry",
+       "registrationNumber": "TN09AB1234",
+       "year": 2025,
+       "color": "Blue",
+       "carType": "Sedan",
+       "seatingCapacity": 5,
+       "pricePerDay": 1500.0,
+       "status": "AVAILABLE",
+       "image": "eNqUu3VcVF3XP3wIFVEJ6Ubp7k6RboZu6ZAcurlQumTozmEYUrpFlE7pRukQkC5B3hm87ud+fu/7+f3xbphz1t5nn73XXvFda585czd79wPAUZRVkAVQUAAABfEH3K2izCq8fm2qDlKTVVCW+XuhD0AUdE4AcHRyB4PkpKj19A2oH/34eweymFm4uQD/94LodT79t+8EG/D/vzy2tHKzQJwPER9aMGJyxJD4CBrf5i/NiKTN/9KiSNrL3cUdQasjabAW6DWCtkTQjDb/izb/X7SFCxjZPwZBizo6eFj8l2/gqZWTtibijIH4kANuAAiQA6SQ6//bxbkAAATPAADtw3/bzNMBoDEUAIjn/9tGmwcA2O8BoGH0v23/lYmLGdjsvgkd8UG1tgaAYxgAPNMHALxvAIBp+B9BhnoJJxIN3KdH4ggh4kZ5IfEuPMJFG7xpj9fzlRgkyPBMLPbohbsHnwazZJUt0bNYzaSwIgkhgA3ABDciXiOq0XOfMmk9eSQN6B7sx2Ce58gVAPIYzc2LJD8YnrV1LCpC0lMVz4wEP/5wCGf0s/IcF9cqVbD/Fsa1DSA8HXSfm8LknfUc8yH8w75WVWh7XtTEJOKS7RcuWbCQqz6Pjf7WWeKBqlZHk5OBz/2u0KYYUFgPOahH9J3AI40fFk1lv/aN23/iAdifkeqOXW0ZZcEa1azul8Sq7y8C/sVe+voP8fxZMCH5Vc/TsQhsS3iEheEhEDmjS0gBoG7kyjR0CE1yg3vGJKkpQVAE/cBDiYbqAvO4bM6KgPdpZBVe0OAEoOuzrcHf8g6v9zseMqKVLuArN2EwZV3IIZ7sGbAGu0jhCFaJycuXhylnW05cEjAmxJqI+UGMBg918a7H8uwr81vH+/5OrPArKjurcDKsqxoZF6fLg9D9n/fSoIfsQL/jLjC4b/iI17QPFi6v8B3plmYg==",
+       "createdAt": "2025-05-31T21:09:30",
+       "modifiedAt": "2025-05-31T21:19:57.0420051"
+   }
+
+3) Getting Car Image
+   http://localhost:8080/api/cars/getCarImage/{carId}
+
+   
+   expected response :
+   Image of car with carId : 4
+
+4) Fetching all cars owned by an owner
+   http://localhost:8080/api/cars/owner/3
+   GET
+
+   expected response:
+   [
+       {
+           "carId": 6,
+           "owner": {
+               "id": 3,
+               "name": "Amit Sharma",
+               "email": "amit.sharma@example.in",
+               "password": "securePass!",
+               "phone": "+91-9876543210",
+               "address": "456 MG Road, Mumbai, India",
+               "role": "OWNER",
+               "createdAt": "2025-05-29T23:55:27",
+               "modifiedAt": "2025-05-29T23:55:27"
+           },
+           "brand": "Toyota",
+           "model": "Camry",
+           "registrationNumber": "TN09AB1234",
+           "year": 2025,
+           "color": "Blue",
+           "carType": "Sedan",
+           "seatingCapacity": 5,
+           "pricePerDay": 2500.0,
+           "status": "BOOKED",
+           "image" : "eNqUu3VcVF3XP3wIFVEJ..."(ignore)
+           "createdAt": "2025-05-31T21:09:30",
+           "modifiedAt": "2025-05-31T21:30:00"
+       }
+   ]
+
+5) Updating Car Details (check if existing details are preserved if not mentioned in updated details)
+   http://localhost:8080/api/cars/6/edit?ownerId=3
+   PUT
+   params - ownerId : 3
+   body - raw-json
+   {
+     "pricePerDay": 2500.0,
+     "status": "BOOKED"
+   }
+
+   expected response:
+   {
+       "carId": 6,
+       "owner": {
+           "id": 3,
+           "name": "Amit Sharma",
+           "email": "amit.sharma@example.in",
+           "password": "securePass!",
+           "phone": "+91-9876543210",
+           "address": "456 MG Road, Mumbai, India",
+           "role": "OWNER",
+           "createdAt": "2025-05-29T23:55:27",
+           "modifiedAt": "2025-05-29T23:55:27"
+       },
+       "brand": "Toyota",
+       "model": "Camry",
+       "registrationNumber": "TN09AB1234",
+       "year": 2025,
+       "color": "Blue",
+       "carType": "Sedan",
+       "seatingCapacity": 5,
+       "pricePerDay": 2500.0,
+       "status": "BOOKED",
+       "image" : "eNqUu3VcVF3XP3w...."(ignore)
+       "createdAt": "2025-05-31T21:09:30",
+       "modifiedAt": "2025-05-31T21:29:59.9281371"
+   }
+
+6) Deleting an existing car
+   http://localhost:8080/api/cars/6/remove?ownerId=3
+   DELETE
+   params - ownerId : 3
+
+   expected output:
+   (nothing...just blank response body)
+   console log : CarService.controller.CarController  : Successfully deleted car [ID: 6]
+   (verify workbench if car is deleted)
+
+7) Search using filters
+
+GET 
+http://localhost:8085/api/cars/search/tata
+
+[
+    {
+        "carId": 12,
+        "owner": {
+            "id": 12,
+            "name": "cool boy",
+            "email": "coolBoy@google",
+            "password": "$2a$10$5Bxd934gJq2hAhOhwWvtkONhtnSmIQlJuU5iAy5TxtcCjSZfeP6ri",
+            "phone": "1234567890",
+            "address": "123 Main Street",
+            "role": "OWNER",
+            "createdAt": "2025-06-05T10:07:18",
+            "modifiedAt": "2025-06-22T22:26:28"
+        },
+        "brand": "Tata",
+        "model": "Nexon Ev",
+        "registrationNumber": "AP39 LK 1234",
+        "year": 2023,
+        "color": "white",
+        "carType": "SUV",
+        "seatingCapacity": 4,
+        "pricePerDay": 600.0,
+        "status": "AVAILABLE",
+        "image": "
+        "createdAt": "2025-06-19T00:02:41",
+        "modifiedAt": "2025-06-25T15:03:03"
+    },
+    {
+        "carId": 14,
+        "owner": {
+            "id": 3,
+            "name": "Amit Sharma",
+            "email": "amit.sharma@example.in",
+            "password": "securePass!",
+            "phone": "+91-9876543210",
+            "address": "456 MG Road, Mumbai, India",
+            "role": "OWNER",
+            "createdAt": "2025-05-27T09:28:12",
+            "modifiedAt": "2025-05-27T09:28:12"
+        },
+        "brand": "Tata",
+        "model": "Nexon Ev Today",
+        "registrationNumber": "",
+        "year": 2023,
+        "color": "",
+        "carType": "",
+        "seatingCapacity": 4,
+        "pricePerDay": 0.0,
+        "status": "AVAILABLE",
+        "image": null,
+        "createdAt": "2025-06-19T12:02:58",
+        "modifiedAt": "2025-06-19T12:02:58"
+    },
+    {
+        "carId": 24,
+        "owner": {
+            "id": 2,
+            "name": "John Doe",
+            "email": "john.doe@example.com",
+            "password": "password123",
+            "phone": "+1-555-1234",
+            "address": "123 Main St, New York, USA",
+            "role": "OWNER",
+            "createdAt": "2025-05-27T09:28:12",
+            "modifiedAt": "2025-05-27T09:28:12"
+        },
+        "brand": "Tata",
+        "model": "Curvv",
+        "registrationNumber": "AP 39 LK 9878",
+        "year": 2023,
+        "color": "white",
+        "carType": "sedan",
+        "seatingCapacity": 4,
+        "pricePerDay": 1000.0,
+        "status": "AVAILABLE",
+        "image": "eNrNd1VTHACTLe7uFtzd3R0GCUEHtwQI7u6DOwSCD+42eHAI7u4a3N3tfnf3Puz9B3seurr6oauru8451
+        "createdAt": "2025-06-23T15:41:07",
+        "modifiedAt": "2025-06-25T15:02:40"
+    }
+]

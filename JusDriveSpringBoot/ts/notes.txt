@@ -1,0 +1,252 @@
+
+//object destructuring
+let person = {
+    name: "John",
+    age: 30,
+    city: "New York"
+};
+let { name, age, city } = person;
+console.log(name); // John
+
+console.log(age); // 30
+console.log(city); // New York
+// array destructuring
+let numbers = [1, 2, 3];
+let [first, second, third] = numbers;
+console.log(first); // 1
+console.log(second); // 2
+console.log(third); // 3
+// function destructuring
+function display({ name, age }: { name: string; age: number }) {
+
+    console.log(`Name: ${name}, Age: ${age}`);
+}
+let user =
+{
+    name: "Alice",
+    age: 25
+};
+display(user); // Name: Alice, Age: 25
+// class destructuring
+class Person {
+    constructor(public name: string, public age: number) { }
+}
+let personInstance = new Person("Bob", 40);
+let { name: personName, age: personAge } = personInstance;
+console.log(personName); // Bob
+console.log(personAge); // 40   
+// nested destructuring
+let data = {
+    user: {
+        name: "Charlie",
+        age: 35
+    },
+    location: {
+        city: "Los Angeles",
+        country: "USA"
+    }
+};
+let {
+    user: { name: userName, age: userAge },
+    location: { city, country }
+} = data;
+console.log(userName); // Charlie
+console.log(userAge); // 35
+console.log(city); // Los Angeles
+console.log(country); // USA
+// function with default parameters
+function greet(name: string = "Guest", age: number = 18): string {
+    return `Hello, ${name}! You are ${age} years old.`;
+}
+console.log(greet()); // Hello, Guest! You are 18 years old.
+console.log(greet("Alice")); // Hello, Alice! You are 18 years old.
+console.log(greet("Bob", 25)); // Hello, Bob! You are 25 years old.
+// function with rest parameters
+function sum(...numbers: number[]): number {
+    return numbers.reduce((acc, curr) => acc + curr, 0);
+}
+console.log(sum(1, 2, 3)); // 6
+console.log(sum(1, 2, 3, 4, 5)); //
+15
+console.log(sum(10, 20, 30, 40, 50)); //
+150
+// function with spread operator
+function multiply(a: number, b: number, c: number): number {
+    return a * b * c;
+}
+let numsToMultiply = [2, 3, 4];
+console.log(multiply(...numsToMultiply)); // 24
+// function with optional parameters
+function greetUser(name: string, age?: number): string {
+    if (age) {
+        return `Hello, ${name}! You are ${age} years old.`;
+    } else {
+        return `Hello, ${name}!`;
+    }
+}
+console.log(greetUser("Alice")); // Hello, Alice!
+console.log(greetUser("Bob", 30));
+// Hello, Bob! You are 30 years old.
+// function with named parameters
+function createUser({ name, age }: { name: string; age: number }): string {
+    return `User created: ${name}, Age: ${age}`;
+}
+console.log(createUser({ name: "Charlie", age: 25 })); // User created: Charlie, Age: 25
+// function with callback
+function processData(data: number[], callback: (item: number) => void): void {
+    data.forEach(callback);
+}
+processData([1, 2, 3], (item) => {
+    console.log(`Processing item: ${item}`);
+});
+// Processing item: 1
+// Processing item: 2
+// Processing item: 3
+// function with promise
+function fetchData(): Promise<string> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("Data fetched successfully!");
+        }, 2000);
+    });
+}
+fetchData().then((result) => {
+    console.log(result); // Data fetched successfully!
+});
+// function with async/await
+async function fetchDataAsync(): Promise<string> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("Data fetched successfully with async/await!");
+        }, 2000);
+    });
+}
+fetchDataAsync().then((result) => {
+    console.log(result); // Data fetched successfully with async/await!
+});
+// function with arrow function
+const addNumbers = (a: number, b: number): number => {
+    return a + b;
+};
+console.log(addNumbers(5, 10)); // 15
+// function with higher-order function
+function higherOrderFunction(callback: (x: number) => number): number {
+    return callback(10);
+}
+console.log(higherOrderFunction((x) => x * 2)); // 20
+// function with type assertion
+function getLength(input: string | string[]): number {
+    if (typeof input === "string") {
+        return input.length;
+    } else {
+        return input.length;
+    }
+}
+console.log(getLength("Hello")); // 5
+console.log(getLength(["Hello", "World"])); // 2
+// function with type guard
+function isString(input: string | number): input is string {
+    return typeof input === "string";
+}
+function processInput(input: string | number): void {
+    if (isString(input)) {
+        console.log(`String input: ${input}`);
+    } else {
+        console.log(`Number input: ${input}`);
+    }
+}
+processInput("Hello"); // String input: Hello
+processInput(42); // Number input: 42
+// function with union type
+function processValue(value: string | number): void {
+    if (typeof value === "string") {
+        console.log(`Processing string: ${value}`);
+    } else {
+        console.log(`Processing number: ${value}`);
+    }
+}
+processValue("Hello"); // Processing string: Hello
+processValue(42); // Processing number: 42
+// function with intersection type
+interface User {
+    name: string;
+    age: number;
+}
+interface Address {
+    city: string;
+    country: string;
+}
+function displayUserInfo(user: User & Address): void {
+    console.log(`Name: ${user.name}, Age: ${user.age}, City: ${user.city}, Country: ${user.country}`);
+}
+displayUserInfo({
+    name: "Alice",
+    age: 30,
+    city: "New York",
+    country: "USA"
+}); // Name: Alice, Age: 30, City: New York, Country: USA
+// function with type alias
+type Point = {
+    x: number;
+    y: number;
+};
+function calculateDistance(point1: Point, point2: Point): number {
+    return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2));
+}
+let pointA: Point = { x: 0, y: 0 };
+let pointB: Point = { x: 3, y: 4 };
+console.log(calculateDistance(pointA, pointB)); // 5
+
+// function with generic type
+function identity<T>(arg: T): T {
+    return arg;
+}
+console.log(identity<string>("Hello")); // Hello
+console.log(identity<number>(42)); // 42
+// function with conditional type
+type ConditionalType<T> = T extends string ? "String" : "Not a String";
+function checkType<T>(value: T): ConditionalType<T> {
+    return (typeof value === "string" ? "String" : "Not a String") as ConditionalType<T>;
+}
+console.log(checkType("Hello")); // String
+console.log(checkType(42)); // Not a String
+// function with mapped type
+type MappedType<T> = {
+    [K in keyof T]: T[K];
+};
+function mapObject<T>(obj: T): MappedType<T> {
+    let result: Partial<MappedType<T>> = {};
+    for (let key in obj) {
+        result[key] = obj[key];
+    }
+    return result as MappedType<T>;
+}
+let userObj = { name: "Alice", age: 30 };
+let mappedUser = mapObject(userObj);
+console.log(mappedUser); // { name: 'Alice', age: 30 }
+// function with keyof operator
+type KeyOfType<T> = keyof T;
+function getKeys<T>(obj: T): KeyOfType<T>[] {   
+    return Object.keys(obj) as KeyOfType<T>[];
+}
+let userKeys = getKeys(userObj);
+console.log(userKeys); // [ 'name', 'age' ]
+// function with typeof operator
+type UserType = typeof userObj;
+function createUserFromType(user: UserType): UserType {
+    return { ...user };
+}
+let newUser = createUserFromType({ name: "Bob", age: 25 });
+console.log(newUser); // { name: 'Bob', age: 25 }
+// function with infer keyword
+type ExtractReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+
+function getReturnType<T extends (...args: any[]) => any>(func: T): Extract
+ReturnType<T> {
+    return func() as ExtractReturnType<T>;
+}
+function exampleFunction(): string {
+    return "Hello, World!";
+}
+let returnType = getReturnType(exampleFunction);
+console.log(returnType); // Hello, World!

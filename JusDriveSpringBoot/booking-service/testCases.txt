@@ -1,0 +1,167 @@
+Test Cases for BookingService Microservice
+
+1. Create a New Booking
+Endpoint: POST /api/bookings/new
+Description: Creates a new booking and sends a confirmation email.
+Request:
+- Method: POST
+- URL: http://localhost:8083/api/bookings/new
+- Headers:
+  - Content-Type: application/json
+- Body (JSON):
+{
+  "customerId": 16,
+  "carId": 11,
+  "bookingDate": "2025-06-20T10:00:00",
+  "returnDate": "2025-06-23T10:00:00",
+  "totalAmount": 500.0,
+  "status": "CONFIRMED",
+  "customerEmail": "vemanajayakrishnachandra@gmail.com"
+}
+Expected Response:
+- Status Code: 200 OK
+- Body (JSON):
+{
+  "customerId": 16,
+  "carId": 11,
+  "bookingDate": "2025-06-20T10:00:00",
+  "returnDate": "2025-06-23T10:00:00",
+  "totalAmount": 500.0,
+  "status": "CONFIRMED",
+  "customerEmail": "vemanajayakrishnachandra@gmail.com"
+}
+
+Error Scenario (Car Not Available):
+- Status Code: 400 Bad Request
+- Body (JSON):
+{
+  "error": "Car is not available for booking",
+  "status": 400
+}
+
+--------------------------------------------------
+
+2. Update Booking Status
+Endpoint: PUT /api/bookings/{bookingId}/status
+Description: Updates the status of an existing booking and sends a status update email.
+Request:
+- Method: PUT
+- URL: http://localhost:8083/api/bookings/1/status?status=CANCELLED
+- Headers:
+  - Content-Type: application/json
+Expected Response:
+- Status Code: 200 OK
+- Body (JSON):
+{
+  "bookingId": 1,
+  "customerId": 101,
+  "carId": 202,
+  "bookingDate": "2025-06-20T10:00:00",
+  "returnDate": "2025-06-23T10:00:00",
+  "totalAmount": 500.0,
+  "status": "CANCELLED",
+  "customerEmail": "customer@example.com"
+}
+
+Error Scenario (Booking Not Found):
+- Status Code: 500 Internal Server Error
+- Body (JSON):
+{
+  "timestamp": "2025-06-19T10:00:00",
+  "status": 500,
+  "error": "Internal Server Error",
+  "message": "Booking not found",
+  "path": "/api/bookings/999/status"
+}
+
+--------------------------------------------------
+
+3. Get Bookings by Customer
+Endpoint: GET /api/bookings/customer/{customerId}
+Description: Retrieves all bookings for a specific customer.
+Request:
+- Method: GET
+- URL: http://localhost:8083/api/bookings/customer/16
+Expected Response:
+- Status Code: 200 OK
+- Body (JSON):
+[
+    {
+        "bookingId": 2,
+        "customerId": 16,
+        "bookingDate": "2025-06-20T10:00:00",
+        "returnDate": "2025-06-23T10:00:00",
+        "totalAmount": 500.0,
+        "status": "CONFIRMED",
+        "customerEmail": "vemanajayakrishnachandra@gmail.com",
+        "carId": 12,
+        "carModel": "Nexon Ev",
+        "carBrand": "Tata",
+        "registrationNumber": "Ap39 LK 1234",
+        "color": "white",
+        "carType": "SUV",
+        "seatingCapacity": 4,
+        "pricePerDay": 600.0,
+        "image": null
+    },
+    {
+        "bookingId": 3,
+        "customerId": 16,
+        "bookingDate": "2025-06-20T10:00:00",
+        "returnDate": "2025-06-23T10:00:00",
+        "totalAmount": 500.0,
+        "status": "CONFIRMED",
+        "customerEmail": "vemanajayakrishnachandra@gmail.com",
+        "carId": 11,
+        "carModel": "Camry",
+        "carBrand": "Toyota",
+        "registrationNumber": "TN09ABQ1234",
+        "color": "Blue",
+        "carType": "Sedan",
+        "seatingCapacity": 5,
+        "pricePerDay": 1500.0,
+        "image": "/9j/4AAQSkZJRgABAQAASABIAAD/2wCEAAEBAQEBAQIBAQICAgIC  }
+]
+
+
+--------------------------------------------------
+4.GET /api/bookings/car/{carId}
+Request
+Method: GET
+URL: http://localhost:8083/api/bookings/car/4
+Replace {carId} with the actual car ID you want to test, e.g., http://localhost:8080/api/bookings/car/202.
+Headers
+Content-Type: application/json
+Example Response
+
+
+[
+  {
+    "bookingId": 1,
+    "customerId": 101,
+    "carId": 4,
+    "bookingDate": "2025-06-19T10:00:00",
+    "returnDate": "2025-06-22T10:00:00",
+    "totalAmount": 4500.0,
+    "status": "CONFIRMED"
+  }
+]
+
+-----------------------------------------------------
+
+5. Error Handling Example
+Endpoint: PUT /api/bookings/{bookingId}/status
+Description: Attempt to update the status of a non-existent booking.
+Request:
+- Method: PUT
+- URL: http://localhost:8083/api/bookings/999/status?status=CANCELLED
+Expected Response:
+- Status Code: 500 Internal Server Error
+- Body (JSON):
+{
+  "timestamp": "2025-06-19T10:00:00",
+  "status": 500,
+  "error": "Internal Server Error",
+  "message": "Booking not found",
+  "path": "/api/bookings/999/status"
+}
